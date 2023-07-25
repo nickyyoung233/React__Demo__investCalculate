@@ -1,11 +1,12 @@
-const ResultItem = () => {
+const ResultItem = ({ item }) => {
+  // savingsEndOfYear: 2.01year: 1yearlyContribution: 1yearlyInterest: 0.01
   return (
     <tr>
-      <td>YEAR NUMBER</td>
-      <td>TOTAL SAVINGS END OF YEAR</td>
-      <td>INTEREST GAINED IN YEAR</td>
-      <td>TOTAL INTEREST GAINED</td>
-      <td>TOTAL INVESTED CAPITAL</td>
+      <td>{item.year}</td>
+      <td>{item.totalSaving}</td>
+      <td>{item.yearlyInterest}</td>
+      <td>{item.totalYearlyInterest}</td>
+      <td>{(+item.totalSaving + +item.yearlyInterest).toFixed(4)}</td>
     </tr>
   );
 };

@@ -2,34 +2,47 @@ import ResultItem from "./ResultItem";
 
 import styles from "./ResultList.module.css";
 
-const ResultList = () => {
+const ResultList = ({ infos }) => {
+  let isCalculated = true;
+  const yearlyData = []; // per-year results
   const calculateHandler = (userInput) => {
-    // Should be triggered when form is submitted
-    // You might not directly want to bind it to the submit event on the form though...
-
-    const yearlyData = []; // per-year results
-
-    let currentSavings = +userInput["current-savings"]; // feel free to change the shape of this input object!
-    const yearlyContribution = +userInput["yearly-contribution"]; // as mentioned: feel free to change the shape...
+    let currentSavings = +userInput["current-savings"];
+    const yearlyContribution = +userInput["yearly-contribution"];
     const expectedReturn = +userInput["expected-return"] / 100;
     const duration = +userInput["duration"];
+    let totalYearlyInterest = 0;
 
     // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < duration; i++) {
-      const yearlyInterest = currentSavings * expectedReturn;
-      currentSavings += yearlyInterest + yearlyContribution;
+      const totalSaving = (
+        currentSavings +
+        yearlyContribution * (i + 1)
+      ).toFixed(4);
+      const yearlyInterest = totalSaving * expectedReturn;
+      totalYearlyInterest += yearlyInterest;
+      currentSavings += yearlyInterest;
       yearlyData.push({
-        // feel free to change the shape of the data pushed to the array!
         year: i + 1,
-        yearlyInterest: yearlyInterest,
-        savingsEndOfYear: currentSavings,
+        totalSaving: totalSaving,
+        yearlyInterest: yearlyInterest.toFixed(4),
+        totalYearlyInterest: totalYearlyInterest.toFixed(4),
+        savingsEndOfYear: currentSavings.toFixed(4),
         yearlyContribution: yearlyContribution,
       });
     }
-
-    // do something with yearlyData ...
   };
-  return (
+
+  if (infos == null) isCalculated = false;
+  else calculateHandler(infos);
+
+  for (const prop in infos) {
+    if (infos[prop] === 0) {
+      isCalculated = false;
+      break;
+    }
+  }
+
+  let baseList = (
     <table className={styles.result}>
       <thead>
         <tr>
@@ -41,9 +54,23 @@ const ResultList = () => {
         </tr>
       </thead>
       <tbody>
-        <ResultItem />
+        {yearlyData.map((item) => (
+          <ResultItem key={item.year} item={item} />
+        ))}
       </tbody>
     </table>
   );
+  console.log(isCalculated);
+  if (!isCalculated)
+    baseList = (
+      <table className={styles.result}>
+        <thead>
+          <tr>
+            <td>Please Input Your Investment</td>
+          </tr>
+        </thead>
+      </table>
+    );
+  return baseList;
 };
 export default ResultList;

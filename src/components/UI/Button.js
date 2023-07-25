@@ -5,7 +5,6 @@ const Button = ({ text, type }) => {
     <button
       type={type}
       className={type === "submit" ? styles.button : styles.buttonAlt}
-      //   className={styles.button}
     >
       {text}
     </button>

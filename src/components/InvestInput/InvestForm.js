@@ -33,7 +33,7 @@ const InvestForm = () => {
       </div>
       <p className={styles.actions}>
         {buttons.map((item) => (
-          <Button text={item.text} type={item.text} />
+          <Button key={item.text} text={item.text} type={item.type} />
         ))}
       </p>
     </form>

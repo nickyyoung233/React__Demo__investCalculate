@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import Header from "./components/UI/Header";
 import InvestForm from "./components/InvestInput/InvestForm";
 import ResultList from "./components/Result/ResultList";
 

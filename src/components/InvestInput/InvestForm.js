@@ -1,5 +1,5 @@
-import Button from "../UI/Button";
-
+import InvestButton from "./InvestButton";
+import InvestItems from "./InvestItems";
 import styles from "./InvestForm.module.css";
 
 const InvestForm = () => {
@@ -7,35 +7,22 @@ const InvestForm = () => {
     { text: "Reset", type: "reset" },
     { text: "Calculate", type: "submit" },
   ];
+  const inputs = [
+    [
+      { text: "Current Savings ($)", id: "current-savings" },
+      { text: "Yearly Savings ($)", id: "yearly-contribution" },
+    ],
+    [
+      { text: "Expected Interest (%, per year)", id: "expected-return" },
+      { text: "Investment Duration (years)", id: "duration" },
+    ],
+  ];
   return (
     <form className={styles.form}>
-      <div className={styles["input-group"]}>
-        <p>
-          <label htmlFor="current-savings">Current Savings ($)</label>
-          <input type="number" id="current-savings" />
-        </p>
-        <p>
-          <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-          <input type="number" id="yearly-contribution" />
-        </p>
-      </div>
-      <div className={styles["input-group"]}>
-        <p>
-          <label htmlFor="expected-return">
-            Expected Interest (%, per year)
-          </label>
-          <input type="number" id="expected-return" />
-        </p>
-        <p>
-          <label htmlFor="duration">Investment Duration (years)</label>
-          <input type="number" id="duration" />
-        </p>
-      </div>
-      <p className={styles.actions}>
-        {buttons.map((item) => (
-          <Button key={item.text} text={item.text} type={item.type} />
-        ))}
-      </p>
+      {inputs.map((items, index) => (
+        <InvestItems key={index} items={items} />
+      ))}
+      <InvestButton buttons={buttons} />
     </form>
   );
 };

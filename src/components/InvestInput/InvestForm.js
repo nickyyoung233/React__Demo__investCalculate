@@ -12,22 +12,22 @@ const InvestForm = ({ getFormData }) => {
   ];
   const inputs = [
     [
-      { text: "Current Savings ($)", id: "current-savings" },
-      { text: "Yearly Savings ($)", id: "yearly-contribution" },
+      { text: "Current Savings (¥)", id: "current-savings" },
+      { text: "Yearly Savings (¥)", id: "yearly-contribution" },
     ],
     [
       { text: "Expected Interest (%, per year)", id: "expected-return" },
       { text: "Investment Duration (years)", id: "duration" },
     ],
   ];
-
-  //getInputs
-  const [inputsInfo, setInputsInfo] = useState({
+  const baseInputs = {
     "current-savings": 0,
     "yearly-contribution": 0,
     "expected-return": 0,
     duration: 0,
-  });
+  };
+  //getInputs
+  const [inputsInfo, setInputsInfo] = useState(baseInputs);
   const getInputsInfo = (infos) => {
     setInputsInfo((prevInputsInfo) => {
       return { ...prevInputsInfo, ...infos };
@@ -35,25 +35,23 @@ const InvestForm = ({ getFormData }) => {
   };
   //sendInputs
   const trigglerButton = (e) => {
-    console.log(e.target.type);
     if (e.target.type === "submit") {
       e.preventDefault();
     } else if (e.target.type === "reset") {
-      setInputsInfo({
-        "current-savings": 0,
-        "yearly-contribution": 0,
-        "expected-return": 0,
-        duration: 0,
-      });
+      setInputsInfo(baseInputs);
     }
-    console.log(inputsInfo);
     getFormData(inputsInfo);
   };
 
   return (
     <form className="form">
       {inputs.map((items, index) => (
-        <InvestItems getInputsInfo={getInputsInfo} key={index} items={items} />
+        <InvestItems
+          getInputsInfo={getInputsInfo}
+          key={index}
+          items={items}
+          inputs={inputsInfo}
+        />
       ))}
       <InvestButton trigglerButton={trigglerButton} buttons={buttons} />
     </form>

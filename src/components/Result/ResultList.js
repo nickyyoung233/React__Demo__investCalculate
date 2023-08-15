@@ -31,8 +31,15 @@ const ResultList = ({ infos }) => {
       });
     }
   };
-
-  if (infos == null) isCalculated = false;
+  console.log(infos);
+  if (
+    infos == null ||
+    infos["current-savings"] === "" ||
+    infos["expected-return"] === "" ||
+    infos["yearly-contribution"] === "" ||
+    infos.duration === ""
+  )
+    isCalculated = false;
   else calculateHandler(infos);
 
   for (const prop in infos) {
@@ -60,7 +67,6 @@ const ResultList = ({ infos }) => {
       </tbody>
     </table>
   );
-  console.log(isCalculated);
   if (!isCalculated)
     baseList = (
       <table className={styles.result}>

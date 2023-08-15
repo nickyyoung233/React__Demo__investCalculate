@@ -7,7 +7,6 @@ const InvestItems = ({ items, getInputsInfo, inputs }) => {
   return (
     <div className={styles["input-group"]}>
       {items.map((item) => {
-        console.log(inputs[item.id]);
         return (
           <p key={item.id}>
             <label htmlFor={item.id}>{item.text}</label>

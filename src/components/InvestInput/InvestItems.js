@@ -15,6 +15,7 @@ const InvestItems = ({ items, getInputsInfo, inputs }) => {
               value={inputs[item.id]}
               onChange={returnValueHandler}
               type="number"
+              min="0"
               id={item.id}
             />
           </p>

@@ -46,11 +46,11 @@ const ResultList = ({ infos }) => {
     <table className={styles.result}>
       <thead>
         <tr>
-          <th>Year</th>
-          <th>Total Savings</th>
-          <th>Interest (Year)</th>
-          <th>Total Interest</th>
-          <th>Invested Capital</th>
+          <th>年份</th>
+          <th>总投入</th>
+          <th>利息 (年)</th>
+          <th>总利息</th>
+          <th>总资本</th>
         </tr>
       </thead>
       <tbody>
@@ -66,7 +66,7 @@ const ResultList = ({ infos }) => {
       <table className={styles.result}>
         <thead>
           <tr>
-            <td>Please Input Your Investment</td>
+            <td>请输入投资信息</td>
           </tr>
         </thead>
       </table>

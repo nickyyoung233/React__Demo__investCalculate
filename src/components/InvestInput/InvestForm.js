@@ -7,24 +7,24 @@ import "./InvestForm.css"; //for global
 
 const InvestForm = ({ getFormData }) => {
   const buttons = [
-    { text: "Reset", type: "reset" },
-    { text: "Calculate", type: "submit" },
+    { text: "重置", type: "reset" },
+    { text: "计算", type: "submit" },
   ];
   const inputs = [
     [
-      { text: "Current Savings (¥)", id: "current-savings" },
-      { text: "Yearly Savings (¥)", id: "yearly-contribution" },
+      { text: "初始投入 (¥)", id: "current-savings" },
+      { text: "年投入 (¥)", id: "yearly-contribution" },
     ],
     [
-      { text: "Expected Interest (%, per year)", id: "expected-return" },
-      { text: "Investment Duration (years)", id: "duration" },
+      { text: "年化率 (%, 每年)", id: "expected-return" },
+      { text: "投资年限 (年)", id: "duration" },
     ],
   ];
   const baseInputs = {
-    "current-savings": 0,
-    "yearly-contribution": 0,
-    "expected-return": 0,
-    duration: 0,
+    "current-savings": "",
+    "yearly-contribution": "",
+    "expected-return": "",
+    duration: "",
   };
   //getInputs
   const [inputsInfo, setInputsInfo] = useState(baseInputs);
